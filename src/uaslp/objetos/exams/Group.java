@@ -1,18 +1,21 @@
 package uaslp.objetos.exams;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Group {
 
-     private int people;
      private int capacity;
-     LinkedList<Student> students = new LinkedList<Student>();
+     private int availibility;
+     private List<Student> students;
 
      public Group (int capacity){
          this.capacity = capacity;
+         availibility = capacity;
+         students = new ArrayList<>(capacity);
      }
 
-     public LinkedList<Student> getStudents(){
+     public List<Student> getStudents(){
          return students;
      }
 
@@ -21,18 +24,26 @@ public class Group {
      }
 
      public int getAvailability(){
-         return capacity - students.size();
+         return availibility;
+     }
+
+     public List<Student> getStudent(){
+         return students;
      }
 
      public void addStudent(Student student){
+         if(availibility == 0)
+             throw new GroupIsFullException();
          students.add(student);
+         availibility--;
      }
 
 
     public double getAverage() {
         double Average=0;
-        for (Student student: students)
-            Average = Average + student.getAverage();
+        Student student;
+        for(int i = 0; i<students.size(); i++)
+            Average = Average + students.get(i).getAverage();
         
         Average = Average / students.size();
 

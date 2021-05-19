@@ -107,7 +107,7 @@ public class SchoolTest {
         lucia.setScore(3, 100);
 
         // When / Then:
-        MissingScoreException exception = Assertions.assertThrows(MissingScoreException.class, () -> lucia.getAverage());
+        Exception exception = Assertions.assertThrows(MissingScoreException.class, () -> lucia.getAverage());
 
         assertEquals("Missing partial 2", exception.getMessage());
 

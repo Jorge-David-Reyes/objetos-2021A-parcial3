@@ -1,4 +1,4 @@
 package uaslp.objetos.exams;
 
-public class GroupIsFullException extends Throwable{
+public class GroupIsFullException extends RuntimeException{
 }

@@ -1,4 +1,7 @@
 package uaslp.objetos.exams;
 
-public class MissingScoreException extends Throwable{
+public class MissingScoreException extends RuntimeException{
+    public MissingScoreException(String message){
+        super(message);
+    }
 }

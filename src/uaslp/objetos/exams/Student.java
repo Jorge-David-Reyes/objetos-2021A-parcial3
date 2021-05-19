@@ -5,12 +5,13 @@ import java.util.ArrayList;
 public class Student {
     private String name;
     private int code;
-    ArrayList<Double> Score = new ArrayList<Double>();
+    Integer score[];
 
 
     public Student(String name, int code){
-        this.name=name;
+        this.name = name;
         this.code = code;
+        score = new Integer[3];
     }
 
     public int getCode(){
@@ -21,21 +22,22 @@ public class Student {
         return name;
     }
 
-    public void setScore(int partial, double score) throws InvalidPartialException {
-        partial = partial -1;
-        if(partial >= 0 && partial < 4){
-            Score.set(partial, score);
-        }
-        else{
+    public void setScore(int partial, int score){
+        if (partial > 3 || partial < 1){
             throw new InvalidPartialException();
         }
+        this.score[partial-1] = score;
     }
 
     public double getAverage(){
-        double Average=0;
-        for(int i = 0; i<3; i++){
-            Average= Average + Score.get(i);
+        double average = 0;
+
+        for(int i = 0; i < 3; i++){
+            if(score[i] == null){
+                throw new MissingScoreException("Missing partial " + (i+1));
+            }
+            average = average + score[i];
         }
-        return Average / 3;
+        return average/3;
     }
 }
